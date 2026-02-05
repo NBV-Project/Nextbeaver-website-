@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Standalone Minimalist FAQ Section</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f98006",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#1a1614",
+                        "espresso": "#1a1614",
+                        "ivory": "#fdfcf0",
+                        "muted-ivory": "#ccad8e"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-espresso dark:bg-background-dark font-display text-espresso dark:text-ivory transition-colors duration-300">
+<div class="relative flex flex-col min-h-screen w-full overflow-x-hidden">
+<main class="flex-1">
+<section class="flex flex-col items-center justify-center pt-24 pb-12 px-6">
+<div class="max-w-[800px] w-full text-center">
+<span class="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Information Center</span>
+<h1 class="text-espresso dark:text-ivory text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
+                        Commonly asked questions.
+                    </h1>
+<p class="text-muted-ivory text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+                        A minimalist approach to complex problems. Find the answers you need to scale your infrastructure effectively.
+                    </p>
+</div>
+</section>
+<section class="flex flex-col items-center px-6 pb-24">
+<div class="max-w-[800px] w-full">
+<div class="flex flex-col space-y-0">
+<details class="group border-t border-primary/40 py-6" open="">
+<summary class="flex cursor-pointer items-center justify-between list-none">
+<h3 class="text-espresso dark:text-ivory text-lg md:text-xl font-bold group-hover:text-primary transition-colors duration-200">
+                                    How does the pricing structure scale?
+                                </h3>
+<div class="text-primary transition-transform duration-300 group-open:rotate-180">
+<span class="material-symbols-outlined text-2xl">expand_more</span>
+</div>
+</summary>
+<div class="mt-4 pr-12">
+<p class="text-muted-ivory text-base md:text-lg leading-relaxed font-normal">
+                                    Our pricing is built on a modular foundation. We offer three tiers designed to grow with your organization, ensuring you only invest in the capabilities you utilize. All enterprise plans include our high-priority support protocols.
+                                </p>
+</div>
+</details>
+<details class="group border-t border-primary/40 py-6">
+<summary class="flex cursor-pointer items-center justify-between list-none">
+<h3 class="text-espresso dark:text-ivory text-lg md:text-xl font-bold group-hover:text-primary transition-colors duration-200">
+                                    What is the typical integration timeline?
+                                </h3>
+<div class="text-primary transition-transform duration-300 group-open:rotate-180">
+<span class="material-symbols-outlined text-2xl">expand_more</span>
+</div>
+</summary>
+<div class="mt-4 pr-12">
+<p class="text-muted-ivory text-base md:text-lg leading-relaxed font-normal">
+                                    Standard deployments are completed within 7 to 14 business days. For complex enterprise environments requiring custom API hooks, our dedicated implementation team provides a detailed roadmap within the first 48 hours.
+                                </p>
+</div>
+</details>
+<details class="group border-t border-primary/40 py-6">
+<summary class="flex cursor-pointer items-center justify-between list-none">
+<h3 class="text-espresso dark:text-ivory text-lg md:text-xl font-bold group-hover:text-primary transition-colors duration-200">
+                                    Do you support custom legacy integrations?
+                                </h3>
+<div class="text-primary transition-transform duration-300 group-open:rotate-180">
+<span class="material-symbols-outlined text-2xl">expand_more</span>
+</div>
+</summary>
+<div class="mt-4 pr-12">
+<p class="text-muted-ivory text-base md:text-lg leading-relaxed font-normal">
+                                    Yes. We specialize in bridging modern cloud infrastructure with legacy on-premise systems. Our engineering team conducts a thorough audit to ensure data integrity remains absolute throughout the synchronization process.
+                                </p>
+</div>
+</details>
+<details class="group border-t border-primary/40 py-6">
+<summary class="flex cursor-pointer items-center justify-between list-none">
+<h3 class="text-espresso dark:text-ivory text-lg md:text-xl font-bold group-hover:text-primary transition-colors duration-200">
+                                    What are the available support SLAs?
+                                </h3>
+<div class="text-primary transition-transform duration-300 group-open:rotate-180">
+<span class="material-symbols-outlined text-2xl">expand_more</span>
+</div>
+</summary>
+<div class="mt-4 pr-12">
+<p class="text-muted-ivory text-base md:text-lg leading-relaxed font-normal">
+                                    We offer three levels of Service Level Agreements (SLAs). Our Premier tier guarantees a 1-hour response time and 24/7 dedicated account management for mission-critical operations.
+                                </p>
+</div>
+</details>
+<details class="group border-t border-b border-primary/40 py-6">
+<summary class="flex cursor-pointer items-center justify-between list-none">
+<h3 class="text-espresso dark:text-ivory text-lg md:text-xl font-bold group-hover:text-primary transition-colors duration-200">
+                                    Can we migrate from other providers?
+                                </h3>
+<div class="text-primary transition-transform duration-300 group-open:rotate-180">
+<span class="material-symbols-outlined text-2xl">expand_more</span>
+</div>
+</summary>
+<div class="mt-4 pr-12">
+<p class="text-muted-ivory text-base md:text-lg leading-relaxed font-normal">
+                                    Absolutely. We provide automated migration tools and white-glove migration services to ensure zero downtime. Most migrations from major providers can be handled in a single maintenance window.
+                                </p>
+</div>
+</details>
+</div>
+</div>
+</section>
+<section class="bg-primary/5 dark:bg-primary/10 py-24 px-6">
+<div class="max-w-[960px] mx-auto text-center flex flex-col items-center gap-8">
+<div class="flex flex-col gap-3">
+<h2 class="text-espresso dark:text-ivory text-3xl md:text-4xl font-bold tracking-tight">Still have questions?</h2>
+<p class="text-muted-ivory text-base md:text-lg max-w-xl">Our team is available for deep-dive technical consultations to help you find the right fit for your business.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-4 w-full">
+<button class="flex min-w-[200px] cursor-pointer items-center justify-center rounded-lg h-14 px-8 bg-primary text-espresso text-base font-bold tracking-wide hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+                            Contact Support
+                        </button>
+<button class="flex min-w-[200px] cursor-pointer items-center justify-center rounded-lg h-14 px-8 bg-espresso dark:bg-ivory/10 text-ivory text-base font-bold tracking-wide hover:bg-espresso/90 transition-all border border-primary/20">
+                            Documentation
+                        </button>
+</div>
+</div>
+</section>
+</main>
+</div>
+
+</body></html>

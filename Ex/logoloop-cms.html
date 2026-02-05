@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elite CMS - Logo Loop Architect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4af25",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#1a1612",
+                        "accent-gold": "#cbb790",
+                        "surface-dark": "#2a2419",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-header {
+                backdrop-filter: blur(16px);
+                background: rgba(26, 22, 18, 0.8);
+                border-bottom: 1px solid rgba(244, 175, 37, 0.2);
+            }
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 4px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: #1a1612;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #f4af25;
+                border-radius: 10px;
+            }
+            .logo-scroller {
+                mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            }
+            .no-mask {
+                mask-image: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30 selection:text-primary overflow-x-hidden">
+<header class="fixed top-0 left-0 right-0 z-50 glass-header">
+<div class="max-w-[1440px] mx-auto px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined font-bold text-xl">all_inclusive</span>
+</div>
+<h1 class="text-xl font-bold tracking-tighter uppercase italic">Elite CMS</h1>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<div class="flex items-center gap-2 text-accent-gold text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Sections</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-white">Logo Loop Architect</span>
+</div>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full border-2 border-background-dark bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBExk-1VNfXNKYDps2fwOzxj30ltD8fXPbqpQjjwzq27BoRAnIJiEcnyqIJo2i4eKKkjvN31cVIHK70hV-qfg5k7GvNH5pe00nxcNPBYpff6uwVTKGe_oLPkRxPfZ1mKTjlKs6h1eMplp3q0n5Lz4paUF3S3pd0V05ioDQki0y94oFVRVg-i0Lk5H2tsdFE2uoUPGuWM8qGkyiQX97O671A23EVhAqX49tS59fvg51yYhgaM5H1sOwhjALnSnRYTOu_HA6OuxJMrR0");'></div>
+<div class="size-8 rounded-full border-2 border-background-dark bg-primary flex items-center justify-center text-[10px] font-bold text-background-dark">+2</div>
+</div>
+<div class="h-6 w-px bg-white/10"></div>
+<button class="flex items-center gap-2 px-6 py-2 bg-primary text-background-dark font-bold rounded-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">publish</span>
+<span class="text-xs uppercase tracking-widest">Deploy</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-8 max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="sticky top-28">
+<div class="relative group overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-[#0d0b09] min-h-[400px] flex flex-col justify-center items-center">
+<div class="text-center mb-12">
+<span class="text-[10px] uppercase tracking-[0.4em] text-accent-gold/40 block mb-2 font-bold">Live Preview</span>
+<h2 class="text-2xl font-light tracking-widest uppercase">Global Partners</h2>
+</div>
+<div class="w-full relative py-12 overflow-hidden">
+<div class="flex items-center gap-16 whitespace-nowrap logo-scroller" id="preview-loop">
+<img alt="Logo 1" class="h-12 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE1Hz1VFAWA8CoJEDi7U1SC9qETqnaLyQHZv_GATa-WD2m8zDWx40QBvfYBjYaKXXaDYuimJWTchyLJjofRGOD7S3aqdtaGOmmN6ch7hu6BlpEhimrsRs4KTA8bqrDOgmIQlokG0pCg25jGHVs05tc4dG70xyIv_K2O1kfYGXYb48Ym_wSGWJikkD4M0eCnpMNRMBvq2ZXHTVJt8fAhg0GrfpWGdfTRkg1KVg9tq15VMOWc9eKTvMDwMYTCY8p-h4MiOJ9XTm4HEE"/>
+<img alt="Logo 2" class="h-10 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ66H-GfAoGnkuW120-17sb14n2nDoQH9z_HcpAXNd-hcBiVHcy_K4ds_GyW2Rilu78Z7936439HKCrfg6SlWAtaJ0v5yPLUqequ6QymExDyMjQFD-tDmfaZZZC-SsoHeLkKTtjFqu3m0iSc0lrFQjHG-17bNsjywt5SQUpxBmTAQzCAC5eRumi-yAj7sAkpALZiI8833u3_-X_K8d1rvAH_g9FFldHkGBTO07F6QRKtJnZu5ivGVndMU0o6LLJTXABQq0iyepi6I"/>
+<img alt="Logo 3" class="h-14 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAveNPyLOUhYvixa0hXNyKMYChq3WoUjouHRSt4liBnyNJV9riuOeTIYpoJMJfVROK8rP_-144Mo_2TDBTUPh3P0GobE85c34BplNLZUGMKZKp58AojQnV1Y4OASIqcXB3Ybv84OmtGbi4wOQKVP1HDYcZ0Q9Szr3vHo9ff18Dmjef1DfAKlljW0_gR1VNYDx5uitF9S0GygDl-9PBGfTo1fvqDiOo8hBn6xbMAm4HLf_QDnYrluGDyWQXO1ESKkjrPyqT5U3NFB2o"/>
+<img alt="Logo 4" class="h-11 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-XQ7D86hoMS88XpKqcMo9zhpqgbOjckxt9V3GlE9WzJe9eWmXTzGpWP--c3wmARe2wCQN9Q8PL5T0q33uQfeYx6E3k96ybkb-FRXViyze1_kMG_RFxTaVdB6l-czo9Kw0xmKNJ3PSDOUTaEU36sU2v53AaJ4nsQRleSn07ShuWsvOfH0PkP7HLnbi9eugUcBJna9JRoyUJHQk-knAxOHz1iyiVg-jIkeziB8Rf5GBft5w7Xvpb5KqdNby6CyANydj18TH6Ul8sgg"/>
+<img alt="Logo 5" class="h-12 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE1Hz1VFAWA8CoJEDi7U1SC9qETqnaLyQHZv_GATa-WD2m8zDWx40QBvfYBjYaKXXaDYuimJWTchyLJjofRGOD7S3aqdtaGOmmN6ch7hu6BlpEhimrsRs4KTA8bqrDOgmIQlokG0pCg25jGHVs05tc4dG70xyIv_K2O1kfYGXYb48Ym_wSGWJikkD4M0eCnpMNRMBvq2ZXHTVJt8fAhg0GrfpWGdfTRkg1KVg9tq15VMOWc9eKTvMDwMYTCY8p-h4MiOJ9XTm4HEE"/>
+<img alt="Logo 6" class="h-10 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ66H-GfAoGnkuW120-17sb14n2nDoQH9z_HcpAXNd-hcBiVHcy_K4ds_GyW2Rilu78Z7936439HKCrfg6SlWAtaJ0v5yPLUqequ6QymExDyMjQFD-tDmfaZZZC-SsoHeLkKTtjFqu3m0iSc0lrFQjHG-17bNsjywt5SQUpxBmTAQzCAC5eRumi-yAj7sAkpALZiI8833u3_-X_K8d1rvAH_g9FFldHkGBTO07F6QRKtJnZu5ivGVndMU0o6LLJTXABQq0iyepi6I"/>
+<img alt="Logo 7" class="h-14 w-auto grayscale opacity-50 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAveNPyLOUhYvixa0hXNyKMYChq3WoUjouHRSt4liBnyNJV9riuOeTIYpoJMJfVROK8rP_-144Mo_2TDBTUPh3P0GobE85c34BplNLZUGMKZKp58AojQnV1Y4OASIqcXB3Ybv84OmtGbi4wOQKVP1HDYcZ0Q9Szr3vHo9ff18Dmjef1DfAKlljW0_gR1VNYDx5uitF9S0GygDl-9PBGfTo1fvqDiOo8hBn6xbMAm4HLf_QDnYrluGDyWQXO1ESKkjrPyqT5U3NFB2o"/>
+</div>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4">
+<button class="size-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined text-sm">desktop_windows</span>
+</button>
+<button class="size-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined text-sm">smartphone</span>
+</button>
+</div>
+</div>
+<div class="mt-8 flex justify-between items-end">
+<div>
+<h3 class="text-2xl font-bold italic tracking-tight">Infinite Sequence</h3>
+<p class="text-accent-gold/60 text-sm">Cinematic partnership display with fluid edge-blending.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-3 bg-surface-dark rounded-lg border border-white/5 text-accent-gold hover:text-primary transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+<button class="p-3 bg-surface-dark rounded-lg border border-white/5 text-accent-gold hover:text-primary transition-colors">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 flex flex-col gap-6 h-[calc(100vh-160px)] overflow-y-auto pr-2 custom-scrollbar">
+<div class="p-6 bg-surface-dark rounded-xl border border-white/5 space-y-8">
+<div class="flex items-center justify-between border-b border-white/10 pb-4">
+<h4 class="uppercase tracking-[0.2em] text-xs font-bold text-accent-gold">Partners &amp; Logos</h4>
+<span class="material-symbols-outlined text-primary">collections</span>
+</div>
+<div class="relative group cursor-pointer">
+<div class="border-2 border-dashed border-white/10 rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:border-primary/40 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-4xl text-primary/40 group-hover:text-primary">upload_file</span>
+<div class="text-center">
+<p class="text-sm font-bold uppercase tracking-widest">Drop Assets Here</p>
+<p class="text-[10px] text-white/40 mt-1">SVG, PNG, or WEBP (Max 2MB)</p>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-[10px] uppercase tracking-widest text-accent-gold/50 font-bold">Active Assets (Drag to re-order)</label>
+<div class="grid grid-cols-1 gap-2">
+<div class="flex items-center justify-between p-3 bg-background-dark rounded-lg border border-white/5 group hover:border-primary/30 transition-colors cursor-grab active:cursor-grabbing">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white/20 text-sm">drag_indicator</span>
+<div class="size-10 bg-white/5 rounded flex items-center justify-center p-2">
+<img class="max-h-full grayscale invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE1Hz1VFAWA8CoJEDi7U1SC9qETqnaLyQHZv_GATa-WD2m8zDWx40QBvfYBjYaKXXaDYuimJWTchyLJjofRGOD7S3aqdtaGOmmN6ch7hu6BlpEhimrsRs4KTA8bqrDOgmIQlokG0pCg25jGHVs05tc4dG70xyIv_K2O1kfYGXYb48Ym_wSGWJikkD4M0eCnpMNRMBvq2ZXHTVJt8fAhg0GrfpWGdfTRkg1KVg9tq15VMOWc9eKTvMDwMYTCY8p-h4MiOJ9XTm4HEE"/>
+</div>
+<span class="text-xs font-medium text-white/80">Aura_Luxury_Main.svg</span>
+</div>
+<button class="text-white/20 hover:text-red-400">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-3 bg-background-dark rounded-lg border border-white/5 group hover:border-primary/30 transition-colors cursor-grab active:cursor-grabbing">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white/20 text-sm">drag_indicator</span>
+<div class="size-10 bg-white/5 rounded flex items-center justify-center p-2">
+<img class="max-h-full grayscale invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ66H-GfAoGnkuW120-17sb14n2nDoQH9z_HcpAXNd-hcBiVHcy_K4ds_GyW2Rilu78Z7936439HKCrfg6SlWAtaJ0v5yPLUqequ6QymExDyMjQFD-tDmfaZZZC-SsoHeLkKTtjFqu3m0iSc0lrFQjHG-17bNsjywt5SQUpxBmTAQzCAC5eRumi-yAj7sAkpALZiI8833u3_-X_K8d1rvAH_g9FFldHkGBTO07F6QRKtJnZu5ivGVndMU0o6LLJTXABQq0iyepi6I"/>
+</div>
+<span class="text-xs font-medium text-white/80">Zenith_Studio.png</span>
+</div>
+<button class="text-white/20 hover:text-red-400">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-3 bg-background-dark rounded-lg border border-white/5 group hover:border-primary/30 transition-colors cursor-grab active:cursor-grabbing">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white/20 text-sm">drag_indicator</span>
+<div class="size-10 bg-white/5 rounded flex items-center justify-center p-2">
+<img class="max-h-full grayscale invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAveNPyLOUhYvixa0hXNyKMYChq3WoUjouHRSt4liBnyNJV9riuOeTIYpoJMJfVROK8rP_-144Mo_2TDBTUPh3P0GobE85c34BplNLZUGMKZKp58AojQnV1Y4OASIqcXB3Ybv84OmtGbi4wOQKVP1HDYcZ0Q9Szr3vHo9ff18Dmjef1DfAKlljW0_gR1VNYDx5uitF9S0GygDl-9PBGfTo1fvqDiOo8hBn6xbMAm4HLf_QDnYrluGDyWQXO1ESKkjrPyqT5U3NFB2o"/>
+</div>
+<span class="text-xs font-medium text-white/80">Equinox_Group.svg</span>
+</div>
+<button class="text-white/20 hover:text-red-400">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-dark rounded-xl border border-white/5 space-y-8">
+<div class="flex items-center justify-between border-b border-white/10 pb-4">
+<h4 class="uppercase tracking-[0.2em] text-xs font-bold text-accent-gold">Cinematic Controls</h4>
+<span class="material-symbols-outlined text-primary">tune</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-white/80">Enable Edge Fade</p>
+<p class="text-[10px] text-white/40 italic">Smooth masking for infinite horizontal flow.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest text-accent-gold/50 font-bold">Gradient Color</label>
+<div class="flex items-center gap-4 p-4 bg-background-dark/50 rounded-xl border border-white/5">
+<div class="size-12 rounded-lg bg-background-dark border border-primary/20 flex items-center justify-center overflow-hidden">
+<input class="size-24 cursor-pointer bg-transparent border-none" type="color" value="#0d0b09"/>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-accent-gold">Masking Hue</p>
+<p class="text-[10px] text-white/40">Match your page background for seamless integration.</p>
+</div>
+<div class="text-xs font-mono text-primary/60">#0D0B09</div>
+</div>
+</div>
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest text-accent-gold/50 font-bold">Scroll Velocity</label>
+<div class="flex items-center gap-6 p-4 bg-background-dark/50 rounded-xl border border-white/5">
+<div class="relative size-20 flex items-center justify-center rounded-full bg-gradient-to-tr from-surface-dark to-primary/20 border border-white/10 shadow-inner">
+<div class="size-14 bg-background-dark rounded-full flex flex-col items-center justify-center">
+<span class="text-[10px] font-bold">12s</span>
+</div>
+<div class="absolute top-1 left-1/2 -translate-x-1/2 size-2 bg-primary rounded-full shadow-[0_0_10px_#f4af25]"></div>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-accent-gold">Loop Duration</p>
+<p class="text-[10px] text-white/40">Controlled by high-precision kinetic damping.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-dark rounded-xl border border-white/5 space-y-4">
+<div class="flex items-center justify-between">
+<h4 class="uppercase tracking-[0.2em] text-xs font-bold text-accent-gold">Styling presets</h4>
+<span class="material-symbols-outlined text-primary">auto_fix</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center gap-2 p-3 bg-primary/10 border border-primary/40 rounded-lg group">
+<span class="material-symbols-outlined text-primary">tonality</span>
+<span class="text-[8px] uppercase tracking-tighter">Monochrome</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 bg-white/5 border border-white/5 rounded-lg hover:border-white/20 transition-all">
+<span class="material-symbols-outlined text-white/40">palette</span>
+<span class="text-[8px] uppercase tracking-tighter">Vivid</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 bg-white/5 border border-white/5 rounded-lg hover:border-white/20 transition-all">
+<span class="material-symbols-outlined text-white/40">invert_colors</span>
+<span class="text-[8px] uppercase tracking-tighter">Glassy</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-10 right-10 flex flex-col gap-4 z-50">
+<button class="group relative size-16 bg-white text-background-dark rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all active:scale-95 overflow-hidden">
+<span class="material-symbols-outlined text-2xl font-bold relative z-10 group-hover:rotate-12 transition-transform">visibility</span>
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
+</button>
+<button class="group relative size-16 bg-primary text-background-dark rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all active:scale-95 overflow-hidden">
+<span class="material-symbols-outlined text-2xl font-bold relative z-10 group-hover:scale-125 transition-transform">save</span>
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+</button>
+</div>
+<div class="fixed bottom-10 left-10 flex items-center gap-4 bg-surface-dark border border-primary/20 px-6 py-4 rounded-full shadow-2xl backdrop-blur-xl">
+<div class="relative size-2">
+<div class="absolute inset-0 bg-primary rounded-full animate-ping"></div>
+<div class="absolute inset-0 bg-primary rounded-full"></div>
+</div>
+<p class="text-[10px] uppercase tracking-widest font-bold text-accent-gold">Loop state synchronized...</p>
+</div>
+
+</body></html>
