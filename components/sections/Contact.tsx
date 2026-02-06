@@ -225,8 +225,11 @@ export default function Contact({
               }}
             >
               <span
-                className="eyebrow-shimmer block"
-                style={{ ["--eyebrow-color" as string]: eyebrowColor || "var(--color-accent)" }}
+                className="block"
+                style={{
+                  ["--eyebrow-color" as string]: eyebrowColor || "var(--color-accent)",
+                  color: eyebrowColor || "var(--color-accent)",
+                }}
               >
                 {eyebrow}
               </span>

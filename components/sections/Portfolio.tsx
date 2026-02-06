@@ -37,11 +37,10 @@ export default function Portfolio({ dict }: PortfolioProps) {
           <div className="max-w-2xl">
             <h2 className="mb-3 text-xs font-bold tracking-[0.15em] sm:mb-4 sm:text-sm sm:tracking-[0.2em]">
               <span
-                className="eyebrow-shimmer eyebrow-shimmer-animate block"
+                className="block"
                 style={{
                   ["--eyebrow-color" as string]: "var(--color-accent)",
-                  animation: "eyebrow-shimmer 2.2s linear infinite",
-                  WebkitAnimation: "eyebrow-shimmer 2.2s linear infinite",
+                  color: "var(--color-accent)",
                 }}
               >
                 {dict.portfolio.eyebrow}

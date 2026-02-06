@@ -62,8 +62,11 @@ export default function Faq({ content, items, lang = "en" }: Props) {
               <div className="text-left">
                 <span className="faq-fall-item font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
                   <span
-                    className="eyebrow-shimmer eyebrow-shimmer-animate block"
-                    style={{ ["--eyebrow-color" as string]: "#f98c1f" }}
+                    className="block"
+                    style={{
+                      ["--eyebrow-color" as string]: "#f98c1f",
+                      color: "#f98c1f",
+                    }}
                   >
                     {resolveText(lang, eyebrow, eyebrowTh)}
                   </span>

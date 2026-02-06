@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, HTMLMotionProps } from "motion/react";
+import { LazyMotion, domAnimation, m, useInView, HTMLMotionProps } from "motion/react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -89,26 +89,28 @@ export default function ScrollReveal({
   const selectedVariant = variants[variant];
 
   return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={{
-        hidden: selectedVariant.hidden,
-        visible: {
-          ...selectedVariant.visible,
-          transition: {
-            duration,
-            delay,
-            ease: [0.22, 1, 0.36, 1], // Custom premium ease (snappy but smooth)
-            staggerChildren,
+    <LazyMotion features={domAnimation}>
+      <m.div
+        ref={ref}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={{
+          hidden: selectedVariant.hidden,
+          visible: {
+            ...selectedVariant.visible,
+            transition: {
+              duration,
+              delay,
+              ease: [0.22, 1, 0.36, 1], // Custom premium ease (snappy but smooth)
+              staggerChildren,
+            },
           },
-        },
-      }}
-      className={cn(className)}
-      {...props}
-    >
-      {children}
-    </motion.div>
+        }}
+        className={cn(className)}
+        {...props}
+      >
+        {children}
+      </m.div>
+    </LazyMotion>
   );
 }

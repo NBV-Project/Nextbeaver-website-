@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { LazyMotion, domAnimation, m, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -79,86 +79,88 @@ export const ThreeDMarquee = ({
 
   const shouldAnimate = isInView && !reduceMotion && !isThemeAnimating && autoScroll;
   return (
-    <div
-      className={cn(
-        "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100",
-        className,
-      )}
-      ref={containerRef}
-    >
-      <div className="flex size-full items-center justify-center">
-        <div className="size-[1720px] shrink-0 scale-50 sm:scale-75 lg:scale-100">
-          <div
-            style={{
-              transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
-            }}
-            className="marquee-grid relative top-96 right-[50%] grid size-full origin-top-left grid-cols-4 gap-8 transform-3d"
-          >
-            {chunks.map((subarray, colIndex) => (
-              <motion.div
-                animate={shouldAnimate ? { y: colIndex % 2 === 0 ? 100 : -100 } : { y: 0 }}
-                transition={
-                  shouldAnimate
-                    ? {
-                      duration: (colIndex % 2 === 0 ? 8 : 12) / speed,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }
-                    : { duration: 0 }
-                }
-                key={colIndex + "marquee"}
-                className="flex flex-col items-start gap-8 will-change-transform"
-              >
-                <GridLineVertical className="-left-4" offset="80px" />
-                {subarray.map((image, imageIndex) => (
-                  <div className="relative" key={imageIndex + image}>
-                    <GridLineHorizontal className="-top-4" offset="20px" />
-                    {interactive ? (
-                      <MotionImage
-                        whileHover={{
-                          y: -10,
-                        }}
-                        transition={{
-                          duration: 0.3,
-                          ease: "easeInOut",
-                        }}
-                        key={imageIndex + image}
-                        src={image}
-                        alt={`Image ${imageIndex + 1}`}
-                        className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl"
-                        width={970}
-                        height={700}
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="low"
-                        draggable={false}
-                        sizes="(min-width: 1280px) 485px, (min-width: 1024px) 420px, 80vw"
-                        unoptimized={isSvgSource(image)}
-                      />
-                    ) : (
-                      <Image
-                        key={imageIndex + image}
-                        src={image}
-                        alt={`Image ${imageIndex + 1}`}
-                        className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5"
-                        width={970}
-                        height={700}
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="low"
-                        draggable={false}
-                        sizes="(min-width: 1280px) 485px, (min-width: 1024px) 420px, 80vw"
-                        unoptimized={isSvgSource(image)}
-                      />
-                    )}
-                  </div>
-                ))}
-              </motion.div>
-            ))}
+    <LazyMotion features={domAnimation}>
+      <div
+        className={cn(
+          "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100",
+          className,
+        )}
+        ref={containerRef}
+      >
+        <div className="flex size-full items-center justify-center">
+          <div className="size-[1720px] shrink-0 scale-50 sm:scale-75 lg:scale-100">
+            <div
+              style={{
+                transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
+              }}
+              className="marquee-grid relative top-96 right-[50%] grid size-full origin-top-left grid-cols-4 gap-8 transform-3d"
+            >
+              {chunks.map((subarray, colIndex) => (
+                <m.div
+                  animate={shouldAnimate ? { y: colIndex % 2 === 0 ? 100 : -100 } : { y: 0 }}
+                  transition={
+                    shouldAnimate
+                      ? {
+                        duration: (colIndex % 2 === 0 ? 8 : 12) / speed,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }
+                      : { duration: 0 }
+                  }
+                  key={colIndex + "marquee"}
+                  className="flex flex-col items-start gap-8 will-change-transform"
+                >
+                  <GridLineVertical className="-left-4" offset="80px" />
+                  {subarray.map((image, imageIndex) => (
+                    <div className="relative" key={imageIndex + image}>
+                      <GridLineHorizontal className="-top-4" offset="20px" />
+                      {interactive ? (
+                        <MotionImage
+                          whileHover={{
+                            y: -10,
+                          }}
+                          transition={{
+                            duration: 0.3,
+                            ease: "easeInOut",
+                          }}
+                          key={imageIndex + image}
+                          src={image}
+                          alt={`Image ${imageIndex + 1}`}
+                          className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl"
+                          width={970}
+                          height={700}
+                          loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
+                          draggable={false}
+                          sizes="(min-width: 1280px) 485px, (min-width: 1024px) 420px, 80vw"
+                          unoptimized={isSvgSource(image)}
+                        />
+                      ) : (
+                        <Image
+                          key={imageIndex + image}
+                          src={image}
+                          alt={`Image ${imageIndex + 1}`}
+                          className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5"
+                          width={970}
+                          height={700}
+                          loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
+                          draggable={false}
+                          sizes="(min-width: 1280px) 485px, (min-width: 1024px) 420px, 80vw"
+                          unoptimized={isSvgSource(image)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </m.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </LazyMotion>
   );
 };
 

@@ -2,7 +2,9 @@
 
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import {
-  motion,
+  LazyMotion,
+  domAnimation,
+  m,
   AnimatePresence,
   Transition,
   type VariantLabels,
@@ -23,7 +25,7 @@ export interface RotatingTextRef {
 
 export interface RotatingTextProps
   extends Omit<
-    React.ComponentPropsWithoutRef<typeof motion.span>,
+    React.ComponentPropsWithoutRef<typeof m.span>,
     'children' | 'transition' | 'initial' | 'animate' | 'exit'
   > {
   texts: string[];
@@ -181,51 +183,53 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
     }, [next, rotationInterval, auto]);
 
     return (
-      <motion.span
-        className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName)}
-        {...rest}
-        layout
-        transition={transition}
-      >
-        <span className="sr-only">{texts[currentTextIndex]}</span>
-        <AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
-          <motion.span
-            key={currentTextIndex}
-            className={cn(splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative')}
-            layout
-            aria-hidden="true"
-          >
-            {elements.map((wordObj, wordIndex, array) => {
-              const previousCharsCount = array
-                .slice(0, wordIndex)
-                .reduce((sum, word) => sum + word.characters.length, 0);
-              return (
-                <span key={wordIndex} className={cn('inline-flex', splitLevelClassName)}>
-                  {wordObj.characters.map((char, charIndex) => (
-                    <motion.span
-                      key={charIndex}
-                      initial={initial}
-                      animate={animate}
-                      exit={exit}
-                      transition={{
-                        ...transition,
-                        delay: getStaggerDelay(
-                          previousCharsCount + charIndex,
-                          array.reduce((sum, word) => sum + word.characters.length, 0)
-                        )
-                      }}
-                      className={cn('inline-block', elementLevelClassName)}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                  {wordObj.needsSpace && <span className="whitespace-pre"> </span>}
-                </span>
-              );
-            })}
-          </motion.span>
-        </AnimatePresence>
-      </motion.span>
+      <LazyMotion features={domAnimation}>
+        <m.span
+          className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName)}
+          {...rest}
+          layout
+          transition={transition}
+        >
+          <span className="sr-only">{texts[currentTextIndex]}</span>
+          <AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
+            <m.span
+              key={currentTextIndex}
+              className={cn(splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative')}
+              layout
+              aria-hidden="true"
+            >
+              {elements.map((wordObj, wordIndex, array) => {
+                const previousCharsCount = array
+                  .slice(0, wordIndex)
+                  .reduce((sum, word) => sum + word.characters.length, 0);
+                return (
+                  <span key={wordIndex} className={cn('inline-flex', splitLevelClassName)}>
+                    {wordObj.characters.map((char, charIndex) => (
+                      <m.span
+                        key={charIndex}
+                        initial={initial}
+                        animate={animate}
+                        exit={exit}
+                        transition={{
+                          ...transition,
+                          delay: getStaggerDelay(
+                            previousCharsCount + charIndex,
+                            array.reduce((sum, word) => sum + word.characters.length, 0)
+                          )
+                        }}
+                        className={cn('inline-block', elementLevelClassName)}
+                      >
+                        {char}
+                      </m.span>
+                    ))}
+                    {wordObj.needsSpace && <span className="whitespace-pre"> </span>}
+                  </span>
+                );
+              })}
+            </m.span>
+          </AnimatePresence>
+        </m.span>
+      </LazyMotion>
     );
   }
 );

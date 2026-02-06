@@ -105,8 +105,11 @@ export default function MarqueeShowcase({
             }}
           >
             <span
-              className="eyebrow-shimmer eyebrow-shimmer-animate inline-block"
-              style={{ ["--eyebrow-color" as string]: badgeColor || "var(--color-accent)" }}
+              className="inline-block"
+              style={{
+                ["--eyebrow-color" as string]: badgeColor || "var(--color-accent)",
+                color: badgeColor || "var(--color-accent)",
+              }}
             >
               {getVal(content.badge, content.badge_th)}
             </span>
@@ -156,7 +159,7 @@ export default function MarqueeShowcase({
             {getVal(content.description, content.description_th)}
           </p>
 
-          <div className="marquee-rise relative z-20 flex flex-wrap items-center justify-center gap-4 pt-4">
+          <div className="marquee-rise relative z-20 flex flex-wrap items-center justify-center gap-4 pt-4 pb-6 sm:pb-0">
             <Link
               href={content.cta1Link || "#"}
               className="cta-uiverse marquee-rise-item rounded-md px-6 py-2.5 text-sm font-bold transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2"

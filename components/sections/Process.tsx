@@ -239,29 +239,17 @@ export default function Process({
                   stroke="url(#mobileLineGradient)"
                   strokeLinecap="round"
                   strokeWidth="1.5"
-                >
-                  <animate
-                    attributeName="stroke-width"
-                    dur={`${linePulseMobile}s`}
-                    repeatCount="indefinite"
-                    values="1;2;1"
-                  />
-                </path>
+                  style={{ animationDuration: `${linePulseMobile}s` }}
+                />
                 <path
                   d="M 18,10 C 18,20 82,20 82,30 C 82,40 18,40 18,50 C 18,60 82,60 82,70 C 82,80 18,80 18,90"
+                  className="process-mobile-dash"
                   stroke={lineDashColor}
                   strokeDasharray="2 4"
                   strokeOpacity="0.6"
                   strokeWidth="0.5"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    dur={`${lineDashMobile}s`}
-                    from="0"
-                    repeatCount="indefinite"
-                    to="-100"
-                  />
-                </path>
+                  style={{ animationDuration: `${lineDashMobile}s` }}
+                />
               </svg>
             </div>
           ) : null}

@@ -300,12 +300,10 @@ export default function Hero({
               </span>
               {renderAnimatedLine(
                 <span
-                  className="eyebrow-shimmer block"
-                  style={{
-                    ["--eyebrow-color" as string]: badgeTextColor,
-                    animation: "eyebrow-shimmer 2.2s linear infinite",
-                    WebkitAnimation: "eyebrow-shimmer 2.2s linear infinite",
-                  }}
+                  className="block"
+                    style={{
+                      ["--eyebrow-color" as string]: badgeTextColor,
+                    }}
                 >
                   {badgeText}
                 </span>,
@@ -315,7 +313,7 @@ export default function Hero({
                   fontFamily: badgeFontFamily,
                   fontSize: badgeFontSize,
                 },
-                0.1
+                0
               )}
             </div>
 
@@ -331,7 +329,7 @@ export default function Hero({
                 fontSize: titleFontSize,
               }}
             >
-              {renderAnimatedLine(title, "block", undefined, 0.3)}
+              {renderAnimatedLine(title, "block", undefined, 0.05)}
               {renderAnimatedLine(
                 accent,
                 "block -mt-0.5 sm:-mt-1 lg:-mt-2 font-semibold transition-none",
@@ -345,7 +343,7 @@ export default function Hero({
                       fontSize: accentFontSize,
                     }
                   : { color: accentColor, fontFamily: accentFontFamily, fontSize: accentFontSize },
-                0.55
+                0.2
               )}
             </h1>
 
@@ -362,7 +360,7 @@ export default function Hero({
                 fontSize: descriptionFontSize,
               }}
             >
-              {renderAnimatedLine(description, "block", undefined, 0.85)}
+              {renderAnimatedLine(description, "block", undefined, 0.35)}
             </p>
 
             {/* Buttons */}

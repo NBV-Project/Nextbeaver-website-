@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type ThemeToggleProps = {
@@ -20,8 +20,6 @@ const THEME_EVENT = "nbv-theme-change";
 
 export default function ThemeToggle({ labels, isScrolled }: ThemeToggleProps) {
   const [theme, setTheme] = useState<ThemeValue>("dark");
-  const [isAnimating, setIsAnimating] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   function applyTheme(next: ThemeValue) {
     const root = document.getElementById(ROOT_ID);
@@ -47,7 +45,6 @@ export default function ThemeToggle({ labels, isScrolled }: ThemeToggleProps) {
   }, []);
 
   function handleToggle() {
-    if (isAnimating) return;
     const next = theme === "dark" ? "light" : "dark";
     const root = document.getElementById(ROOT_ID);
     const html = document.documentElement;
@@ -69,76 +66,12 @@ export default function ThemeToggle({ labels, isScrolled }: ThemeToggleProps) {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
-      setTheme(next);
-      applyTheme(next);
-      window.scrollTo({ left: scrollX, top: scrollY, behavior: "auto" });
-      html.style.scrollBehavior = previousScrollBehavior;
-      html.style.overflowAnchor = previousHtmlOverflowAnchor;
-      document.body.style.overflowAnchor = previousBodyOverflowAnchor;
-      return;
-    }
-
-    setIsAnimating(true);
-    document.documentElement.dataset.themeAnimating = "true";
-    const overlay = document.createElement("div");
-    overlay.className = "theme-clip";
-    overlay.setAttribute("aria-hidden", "true");
-
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (rect) {
-      overlay.style.setProperty(
-        "--clip-x",
-        `${rect.left + rect.width / 2}px`,
-      );
-      overlay.style.setProperty(
-        "--clip-y",
-        `${rect.top + rect.height / 2}px`,
-      );
-    }
-
-    const clone = root.cloneNode(true) as HTMLElement;
-    clone.id = `${ROOT_ID}-clone`;
-    clone.setAttribute("aria-hidden", "true");
-    clone.classList.remove("theme-dark", "theme-light");
-    clone.classList.add(`theme-${next}`);
-    clone
-      .querySelectorAll<HTMLSpanElement>(
-        "[data-theme-toggle] .material-symbols-outlined",
-      )
-      .forEach((icon) => {
-        icon.textContent = next === "dark" ? "dark_mode" : "light_mode";
-      });
-    clone.style.position = "absolute";
-    clone.style.top = `${-window.scrollY}px`;
-    clone.style.left = "0";
-    clone.style.right = "0";
-    clone.style.width = "100%";
-    clone.style.height = `${document.documentElement.scrollHeight}px`;
-    clone.style.pointerEvents = "none";
-
-    overlay.appendChild(clone);
-    document.body.appendChild(overlay);
-
-    requestAnimationFrame(() => {
-      overlay.classList.add("theme-clip--animating");
-    });
-
-    window.setTimeout(() => {
-      applyTheme(next);
-      setTheme(next);
-      window.scrollTo({ left: scrollX, top: scrollY, behavior: "auto" });
-      overlay.remove();
-      delete document.documentElement.dataset.themeAnimating;
-      html.style.scrollBehavior = previousScrollBehavior;
-      html.style.overflowAnchor = previousHtmlOverflowAnchor;
-      document.body.style.overflowAnchor = previousBodyOverflowAnchor;
-      setIsAnimating(false);
-    }, 1100);
+    setTheme(next);
+    applyTheme(next);
+    window.scrollTo({ left: scrollX, top: scrollY, behavior: "auto" });
+    html.style.scrollBehavior = previousScrollBehavior;
+    html.style.overflowAnchor = previousHtmlOverflowAnchor;
+    document.body.style.overflowAnchor = previousBodyOverflowAnchor;
   }
 
   return (
@@ -150,9 +83,6 @@ export default function ThemeToggle({ labels, isScrolled }: ThemeToggleProps) {
       )}
       onClick={handleToggle}
       aria-label={labels.label}
-      aria-disabled={isAnimating}
-      disabled={isAnimating}
-      ref={buttonRef}
       data-theme-toggle
       suppressHydrationWarning
     >

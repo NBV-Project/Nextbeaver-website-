@@ -7,10 +7,6 @@ import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 // Removed unused imports: ChevronLeft, ChevronRight
 import { cn } from "@/lib/utils";
 import type { ServicesContent, ServicesStyles, ServiceItem, ServicePlan } from "@/lib/supabase/services";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type ServicesProps = {
   dict: {
@@ -143,46 +139,55 @@ export default function Services({ dict, content, styles, items, locale = "en", 
 
   // --- GSAP Animation ---
   useEffect(() => {
-    if (preview || !sliderRef.current) return;
+    if (preview || !sliderRef.current || !isInView) return;
 
-    // Use a small timeout to ensure DOM is fully ready and styles applied
-    const timeoutId = setTimeout(() => {
-      const ctx = gsap.context(() => {
+    let isActive = true;
+    let ctx: { revert: () => void } | null = null;
+
+    const timeoutId = window.setTimeout(async () => {
+      if (!isActive) return;
+      const { default: gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      if (!isActive || !sliderRef.current) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      ctx = gsap.context(() => {
         const cards = gsap.utils.toArray(".service-card-item");
-        
         if (cards.length === 0) return;
 
         gsap.fromTo(
           cards,
-          { 
-            x: -800, // Start far left off-screen
+          {
+            x: -800,
             opacity: 0,
-            force3D: true // Force GPU acceleration for smoother animation
+            force3D: true,
           },
           {
             x: 0,
             opacity: 1,
-            duration: 1, // Not too slow
+            duration: 1,
             stagger: {
-              from: "end", // Start with card 4 (rightmost)
-              amount: 0.6 // Tighter timing for "flow" feel
+              from: "end",
+              amount: 0.6,
             },
-            ease: "power2.out", // Smooth but quick linear feel
+            ease: "power2.out",
             scrollTrigger: {
               trigger: sliderRef.current,
-              start: "top 85%", 
+              start: "top 85%",
               toggleActions: "play none none none",
               once: true,
             },
           }
         );
       }, sliderRef);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timeoutId);
-  }, [preview, serviceItems]); // Add serviceItems dependency to re-run if items change
+    return () => {
+      isActive = false;
+      window.clearTimeout(timeoutId);
+      ctx?.revert();
+    };
+  }, [preview, isInView, serviceItems]);
 
   const getStyle = (key: keyof ServicesStyles, fallback?: string | number) => {
     if (!styles) return fallback;
@@ -264,10 +269,37 @@ export default function Services({ dict, content, styles, items, locale = "en", 
     setActivePlanIndex(closestIndex);
   };
 
+  const handleServiceScroll = useCallback(() => {
+    const container = sliderRef.current;
+    if (!container) return;
+    const cards = Array.from(container.querySelectorAll<HTMLElement>(".service-card-item"));
+    if (!cards.length) return;
+    const currentLeft = container.scrollLeft;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+    cards.forEach((card, index) => {
+      const distance = Math.abs(card.offsetLeft - currentLeft);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+    setActiveServiceIndex(closestIndex);
+  }, []);
+
   const scrollToPlan = (index: number) => {
     const container = modalContainerRef.current;
     if (!container) return;
     const cards = container.querySelectorAll<HTMLElement>(".services-pricing-card");
+    const card = cards[index];
+    if (!card) return;
+    container.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
+  };
+
+  const scrollToService = (index: number) => {
+    const container = sliderRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>(".service-card-item");
     const card = cards[index];
     if (!card) return;
     container.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
@@ -296,6 +328,7 @@ export default function Services({ dict, content, styles, items, locale = "en", 
   const sliderWrapperStyle = previewIsMobile ? { width: "100vw", marginLeft: "calc((100vw - 100%) / -2)", marginRight: "calc((100vw - 100%) / -2)" } : undefined;
   const sectionContainerClasses = cn("mx-auto w-full", previewIsMobile ? "max-w-full px-0" : "sm:container sm:px-6 md:px-12 lg:px-20");
   const sectionPaddingClass = preview ? (previewIsMobile ? "py-0" : "py-6 sm:py-8") : "pt-0 pb-16 sm:py-20 md:py-24 lg:py-32";
+  const showServiceDots = totalItems > 1 && (previewDevice ? previewDevice === "mobile" : true);
 
   // --- RENDERING HELPERS ---
   const renderPlans = () => modalPlans.map((plan, index) => {
@@ -396,8 +429,11 @@ export default function Services({ dict, content, styles, items, locale = "en", 
               style={{ fontFamily: getFont("eyebrow"), fontSize: clampPreviewFont(getStyle("eyebrowFontSize"), 10) ? `${clampPreviewFont(getStyle("eyebrowFontSize"), 10)}px` : undefined }}
             >
               <span
-                className="eyebrow-shimmer block"
-                style={{ ["--eyebrow-color" as string]: getThemeColor("eyebrowColor", "var(--color-primary)") }}
+                className="block"
+                style={{
+                  ["--eyebrow-color" as string]: getThemeColor("eyebrowColor", "var(--color-primary)"),
+                  color: getThemeColor("eyebrowColor", "var(--color-primary)"),
+                }}
               >
                 {eyebrow}
               </span>
@@ -414,7 +450,7 @@ export default function Services({ dict, content, styles, items, locale = "en", 
         </div>
 
         <div className={cn("relative group/slider w-full max-w-full", preview && previewIsMobile && "overflow-x-hidden px-0")} style={sliderWrapperStyle}>
-          <div ref={sliderRef} className={sliderClasses} style={{ scrollbarWidth: 'none' }}>
+          <div ref={sliderRef} className={sliderClasses} style={{ scrollbarWidth: "none" }} onScroll={handleServiceScroll}>
             {serviceItems.map((item, index) => {
               const itemTitle = locale === "th" && item.title_th ? item.title_th : item.title;
               const itemBody = locale === "th" && item.body_th ? item.body_th : item.body;
@@ -509,6 +545,20 @@ export default function Services({ dict, content, styles, items, locale = "en", 
             })}
           </div>
         </div>
+        {showServiceDots ? (
+          <div className="services-slider-dots mt-4 sm:hidden" role="tablist" aria-label="Service cards">
+            {serviceItems.map((item, index) => (
+              <button
+                key={`service-dot-${item.id || index}`}
+                type="button"
+                className={cn("services-slider-dot", index === activeServiceIndex && "active")}
+                onClick={() => scrollToService(index)}
+                aria-label={`Go to service ${index + 1}`}
+                aria-current={index === activeServiceIndex ? "true" : "false"}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
 
       {isPortalReady && (preview ? Boolean(previewModalId) : isModalOpen) && !preview &&

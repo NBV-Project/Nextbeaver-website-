@@ -73,6 +73,12 @@ export default function About({
   useEffect(() => {
     const node = sectionRef.current;
     if (!node || typeof window === "undefined" || previewDevice) return;
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      const timeoutId = window.setTimeout(() => {
+        setIsInView(true);
+      }, 120);
+      return () => window.clearTimeout(timeoutId);
+    }
     if (!("IntersectionObserver" in window)) {
       setTimeout(() => setIsInView(true), 0);
       return;
@@ -84,7 +90,7 @@ export default function About({
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.2, rootMargin: "0px 0px -20% 0px" }
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -290,8 +296,11 @@ export default function About({
                 }}
               >
                 <span
-                  className="eyebrow-shimmer block"
-                  style={{ ["--eyebrow-color" as string]: eyebrowColor }}
+                  className="block"
+                  style={{
+                    ["--eyebrow-color" as string]: eyebrowColor,
+                    color: eyebrowColor,
+                  }}
                 >
                   {eyebrow}
                 </span>

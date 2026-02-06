@@ -1,15 +1,15 @@
 import { cookies } from "next/headers";
 import type { Metadata } from "next";
+import dynamicImport from "next/dynamic";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import PortfolioGallery from "@/components/portfolio/PortfolioGallery";
 import PortfolioHero from "@/components/portfolio/PortfolioHero";
 import DynamicFontLoader from "@/components/portfolio/DynamicFontLoader";
 import { getPortfolioContent } from "@/lib/supabase/portfolio";
 import { getDictionary, getLocaleFromCookies } from "@/lib/i18n";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "auto";
+export const revalidate = 600;
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nextbeaver.co";
 
@@ -41,6 +41,10 @@ export const metadata: Metadata = {
     images: ["/og-image.jpg"],
   },
 };
+
+const PortfolioGallery = dynamicImport(() => import("@/components/portfolio/PortfolioGallery"), {
+  loading: () => <div className="min-h-[520px] w-full" aria-hidden />,
+});
 
 export default async function PortfolioPage() {
   const cookieStore = await cookies();

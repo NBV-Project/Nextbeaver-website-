@@ -169,8 +169,10 @@ export default function Header({ dict, locale }: HeaderProps) {
                   alt="Nextbeaver logo"
                   width={80}
                   height={80}
-                  className="h-14 w-14 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20 transition-transform duration-300"
+                  className="h-14 w-14 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20"
                   priority
+                  fetchPriority="high"
+                  sizes="(min-width: 768px) 80px, 56px"
                 />
                 <span className="-ml-2 h-4 w-0.5 bg-primary sm:-ml-3 sm:h-5 md:-ml-4 md:h-6" aria-hidden />
                 <div className="flex flex-col justify-center pl-1">

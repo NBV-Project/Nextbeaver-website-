@@ -9,7 +9,7 @@ import type { LogoItem } from "@/components/LogoLoop";
 import Faq from "@/components/sections/Faq";
 
 import { getDictionary, getLocaleFromCookies } from "@/lib/i18n";
-import { DEFAULT_HOME_CONTENT, getHomeContent, getHomeContentUncached } from "@/lib/supabase/home";
+import { DEFAULT_HOME_CONTENT, getHomeContent } from "@/lib/supabase/home";
 import { getAboutContent } from "@/lib/supabase/about";
 import { getProcessContent } from "@/lib/supabase/process";
 import { getServicesContent } from "@/lib/supabase/services";
@@ -24,10 +24,10 @@ const About = dynamicImport(() => import("@/components/sections/About"), {
   loading: () => <div className="min-h-[600px] w-full" aria-hidden />,
 });
 const Process = dynamicImport(() => import("@/components/sections/Process"), {
-  loading: () => <div className="min-h-[600px] w-full" aria-hidden />,
+  loading: () => <div className="process-loading w-full" aria-hidden />,
 });
 const Services = dynamicImport(() => import("@/components/sections/Services"), {
-  loading: () => <div className="min-h-[700px] w-full" aria-hidden />,
+  loading: () => <div className="services-loading w-full" aria-hidden />,
 });
 const Quote = dynamicImport(() => import("@/components/sections/Quote"), {
   loading: () => <div className="min-h-[360px] w-full" aria-hidden />,
@@ -36,7 +36,8 @@ const Contact = dynamicImport(() => import("@/components/sections/Contact"), {
   loading: () => <div className="min-h-[700px] w-full" aria-hidden />,
 });
 
-export const dynamic = "force-dynamic";
+export const dynamic = "auto";
+export const revalidate = 600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -87,7 +88,7 @@ export default async function Home() {
     contactContent,
     faqContent
   ] = await Promise.all([
-    process.env.NODE_ENV === "development" ? getHomeContentUncached() : getHomeContent(),
+    getHomeContent(),
     getAboutContent(),
     getProcessContent(),
     getServicesContent(),
